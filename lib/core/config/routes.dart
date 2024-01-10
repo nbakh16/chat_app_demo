@@ -3,7 +3,6 @@ import 'package:chat_app_demo/view/home_view.dart';
 import 'package:chat_app_demo/view/login_view.dart';
 import 'package:chat_app_demo/view/register_view.dart';
 import 'package:go_router/go_router.dart';
-import '../../auth/check_login.dart';
 
 final appRoutes = GoRouter(
   initialLocation: '/',
@@ -24,12 +23,12 @@ final appRoutes = GoRouter(
       path: '/home',
       name: RouteName.home,
       builder: (context, state) => const HomeView(),
-      redirect: (context, state) {
-        if (!isLoggedIn) {
-          return '/login';
-        }
-        return null;
-      },
+      // redirect: (context, state) {
+      //   if (!isLoggedIn) {
+      //     return '/login';
+      //   }
+      //   return null;
+      // },
     ),
     GoRoute(
       path: '/login',

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:logger/logger.dart';
 import '../widgets/my_text_form_field.dart';
 
 class LoginView extends StatelessWidget {
@@ -19,10 +19,14 @@ class LoginView extends StatelessWidget {
 
   void login() async {
     try {
-      await AuthService()
-          .loginUser(_emailTEController.text.trim(), _passTEController.text);
+      if (_formKey.currentState!.validate()) {
+        await AuthService().loginUser(
+          _emailTEController.text.trim(),
+          _passTEController.text,
+        );
+      }
     } catch (e) {
-      print('ERROR: $e');
+      Logger().e('Login ERROR: $e');
     }
   }
 

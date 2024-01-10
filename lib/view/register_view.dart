@@ -1,3 +1,4 @@
+import 'package:chat_app_demo/core/config/routes.dart';
 import 'package:chat_app_demo/core/utils/int_extensions.dart';
 import 'package:chat_app_demo/widgets/btn_text.dart';
 import 'package:chat_app_demo/widgets/my_buttons.dart';
@@ -5,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:logger/logger.dart';
+import '../auth/auth_service.dart';
 import '../widgets/my_text_form_field.dart';
 
 class RegisterView extends StatelessWidget {
@@ -16,16 +18,31 @@ class RegisterView extends StatelessWidget {
   final TextEditingController _passTEController = TextEditingController();
   final TextEditingController _conPassTEController = TextEditingController();
 
+  void register(BuildContext context) async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        await AuthService()
+            .registerUser(
+              _emailTEController.text.trim(),
+              _passTEController.text,
+            )
+            .then((value) => context.goNamed(RouteName.home));
+      }
+    } catch (e) {
+      Logger().e('Registration ERROR: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 25.h),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
+              50.height,
               Icon(
                 Icons.message,
                 size: 60,
@@ -58,9 +75,9 @@ class RegisterView extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(),
+              50.height,
               PrimaryBtn(
-                onTap: () {},
+                onTap: () => register(context),
                 child: const BtnText('Register'),
               ),
               12.height,
