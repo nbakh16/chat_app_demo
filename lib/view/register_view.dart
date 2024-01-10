@@ -7,12 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/my_text_form_field.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class RegisterView extends StatelessWidget {
+  RegisterView({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passTEController = TextEditingController();
+  final TextEditingController _conPassTEController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class LoginView extends StatelessWidget {
               ),
               25.height,
               Text(
-                'Login',
+                'Register',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               25.height,
@@ -47,25 +48,30 @@ class LoginView extends StatelessWidget {
                       controller: _passTEController,
                       hintText: 'Password',
                     ),
+                    12.height,
+                    MyTextFormField(
+                      controller: _conPassTEController,
+                      hintText: 'Confirm Password',
+                    ),
                   ],
                 ),
               ),
               const Spacer(),
               PrimaryBtn(
                 onTap: () {},
-                child: const BtnText('Login'),
+                child: const BtnText('Register'),
               ),
               12.height,
               RichText(
                 text: TextSpan(
-                  text: 'No Account? ',
+                  text: 'Already have an account? ',
                   style: Theme.of(context).textTheme.bodyLarge,
                   children: <WidgetSpan>[
                     WidgetSpan(
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Register here',
+                          'Login',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ),
