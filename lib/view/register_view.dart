@@ -4,6 +4,7 @@ import 'package:chat_app_demo/widgets/my_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/my_text_form_field.dart';
 
@@ -69,7 +70,9 @@ class RegisterView extends StatelessWidget {
                   children: <WidgetSpan>[
                     WidgetSpan(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pop();
+                        },
                         child: Text(
                           'Login',
                           style: Theme.of(context).textTheme.labelLarge,

@@ -1,5 +1,5 @@
+import 'package:chat_app_demo/core/config/routes.dart';
 import 'package:chat_app_demo/core/config/theme/app_theme.dart';
-import 'package:chat_app_demo/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, __) {
-          return MaterialApp(
+          return MaterialApp.router(
             title: 'Chit Chat',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.defaultTheme,
             // darkTheme: AppTheme.darkTheme,
-            home: LoginView(),
+            routerConfig: appRoutes,
           );
         });
   }

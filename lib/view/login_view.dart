@@ -1,9 +1,11 @@
+import 'package:chat_app_demo/core/config/routes.dart';
 import 'package:chat_app_demo/core/utils/int_extensions.dart';
 import 'package:chat_app_demo/widgets/btn_text.dart';
 import 'package:chat_app_demo/widgets/my_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/my_text_form_field.dart';
 
@@ -63,7 +65,9 @@ class LoginView extends StatelessWidget {
                   children: <WidgetSpan>[
                     WidgetSpan(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.goNamed(RouteName.register);
+                        },
                         child: Text(
                           'Register here',
                           style: Theme.of(context).textTheme.labelLarge,
