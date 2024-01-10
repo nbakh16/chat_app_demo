@@ -25,6 +25,7 @@ class RegisterView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Spacer(),
               Icon(
                 Icons.message,
                 size: 60,
@@ -63,29 +64,29 @@ class RegisterView extends StatelessWidget {
                 child: const BtnText('Register'),
               ),
               12.height,
-              RichText(
-                text: TextSpan(
-                  text: 'Already have an account? ',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  children: <WidgetSpan>[
-                    WidgetSpan(
-                      child: TextButton(
-                        onPressed: () {
-                          context.pop();
-                        },
+              GestureDetector(
+                onTap: () {
+                  context.pop();
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account? ',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: <WidgetSpan>[
+                      WidgetSpan(
                         child: Text(
                           'Login',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ]
-                .animate(interval: 250.ms)
+                .animate(interval: 50.ms)
                 .fade(duration: 200.ms)
-                .scale(duration: 250.ms),
+                .scale(duration: 200.ms),
           ),
         ),
       ),

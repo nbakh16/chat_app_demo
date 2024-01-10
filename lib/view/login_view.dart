@@ -1,3 +1,4 @@
+import 'package:chat_app_demo/auth/auth_service.dart';
 import 'package:chat_app_demo/core/config/routes.dart';
 import 'package:chat_app_demo/core/utils/int_extensions.dart';
 import 'package:chat_app_demo/widgets/btn_text.dart';
@@ -16,6 +17,15 @@ class LoginView extends StatelessWidget {
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passTEController = TextEditingController();
 
+  void login() async {
+    try {
+      await AuthService()
+          .loginUser(_emailTEController.text.trim(), _passTEController.text);
+    } catch (e) {
+      print('ERROR: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +35,7 @@ class LoginView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Spacer(),
               Icon(
                 Icons.message,
                 size: 60,
@@ -54,33 +65,33 @@ class LoginView extends StatelessWidget {
               ),
               const Spacer(),
               PrimaryBtn(
-                onTap: () {},
+                onTap: login,
                 child: const BtnText('Login'),
               ),
               12.height,
-              RichText(
-                text: TextSpan(
-                  text: 'No Account? ',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  children: <WidgetSpan>[
-                    WidgetSpan(
-                      child: TextButton(
-                        onPressed: () {
-                          context.goNamed(RouteName.register);
-                        },
+              GestureDetector(
+                onTap: () {
+                  context.goNamed(RouteName.register);
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'No Account? ',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: <WidgetSpan>[
+                      WidgetSpan(
                         child: Text(
                           'Register here',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ]
-                .animate(interval: 250.ms)
+                .animate(interval: 50.ms)
                 .fade(duration: 200.ms)
-                .scale(duration: 250.ms),
+                .scale(duration: 200.ms),
           ),
         ),
       ),
