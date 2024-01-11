@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
-import '../auth/auth_service.dart';
+import '../services/auth/auth_service.dart';
 import '../widgets/my_text_form_field.dart';
 
 class RegisterView extends StatelessWidget {

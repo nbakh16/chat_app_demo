@@ -1,4 +1,4 @@
-import 'package:chat_app_demo/auth/auth_gate.dart';
+import 'package:chat_app_demo/services/auth/auth_gate.dart';
 import 'package:chat_app_demo/view/home_view.dart';
 import 'package:chat_app_demo/view/login_view.dart';
 import 'package:chat_app_demo/view/register_view.dart';
@@ -22,7 +22,7 @@ final appRoutes = GoRouter(
     GoRoute(
       path: '/home',
       name: RouteName.home,
-      builder: (context, state) => const HomeView(),
+      builder: (context, state) => HomeView(),
       // redirect: (context, state) {
       //   if (!isLoggedIn) {
       //     return '/login';
