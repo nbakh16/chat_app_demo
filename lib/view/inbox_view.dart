@@ -6,22 +6,67 @@ import 'package:flutter/material.dart';
 
 import '../widgets/chat_bubble.dart';
 
-class InboxView extends StatelessWidget {
+class InboxView extends StatefulWidget {
   InboxView({super.key, required this.userEmail, required this.userId});
   final String userEmail, userId;
 
+  @override
+  State<InboxView> createState() => _InboxViewState();
+}
+
+class _InboxViewState extends State<InboxView> {
   final TextEditingController _msgTEController = TextEditingController();
+
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
+
+  final FocusNode _focusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          () => scrollDown(),
+        );
+      }
+    });
+
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => scrollDown(),
+    );
+  }
+
+  void scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    _msgTEController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   //send msg
   void sendMsg() async {
     if (_msgTEController.text.isNotEmpty) {
       await _chatService.sendMessage(
-        userId,
+        widget.userId,
         _msgTEController.text.trim(),
       );
       _msgTEController.clear();
+
+      scrollDown();
     }
   }
 
@@ -29,7 +74,7 @@ class InboxView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(userEmail),
+        title: Text(widget.userEmail),
       ),
       body: Column(
         children: [
@@ -47,7 +92,7 @@ class InboxView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: StreamBuilder(
-          stream: _chatService.getMessage(userId, senderId),
+          stream: _chatService.getMessage(widget.userId, senderId),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Text('error');
@@ -56,6 +101,7 @@ class InboxView extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             return ListView(
+              controller: _scrollController,
               children:
                   snapshot.data!.docs.map((e) => _buildMessageItem(e)).toList(),
             );
@@ -86,6 +132,7 @@ class InboxView extends StatelessWidget {
           Expanded(
             child: MyTextFormField(
               controller: _msgTEController,
+              focusNode: _focusNode,
               hintText: 'Write message...',
             ),
           ),

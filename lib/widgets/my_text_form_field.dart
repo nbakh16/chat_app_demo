@@ -7,17 +7,20 @@ class MyTextFormField extends StatelessWidget {
     this.obscureText = false,
     required this.controller,
     this.validator,
+    this.focusNode,
   });
 
   final String? hintText;
   final bool obscureText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       obscureText: obscureText,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
