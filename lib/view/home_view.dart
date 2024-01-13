@@ -79,13 +79,12 @@ class HomeView extends StatelessWidget {
         stream: _chat.getUsersStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text('Error loading user');
+            return const Text('Error loading user');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
+            return const Center(child: CircularProgressIndicator());
           }
 
-          print('>>${snapshot.data}');
           return ListView(
             children: snapshot.data!
                 .map<Widget>(
@@ -98,15 +97,28 @@ class HomeView extends StatelessWidget {
   Widget _buildUserListItem(
       BuildContext context, Map<String, dynamic> userData) {
     if (userData['email'] != _auth.getCurrentUser()!.email) {
-      return ListTile(
-        onTap: () {
-          context.goNamed(
-            RouteName.inbox,
-            pathParameters: {'user': userData['email']},
-          );
-        },
-        title: Text(
-          userData['email'],
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListTile(
+          onTap: () {
+            context.goNamed(RouteName.inbox,
+                // pathParameters: {'user': userData['email']},
+                queryParameters: {
+                  'userEmail': userData['email'],
+                  'userId': userData['uid']
+                });
+          },
+          title: Text(
+            userData['email'],
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          leading: const CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Icon(
+              Icons.person_2,
+              color: Colors.grey,
+            ),
+          ),
         ),
       );
     } else {

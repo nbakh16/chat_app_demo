@@ -26,11 +26,12 @@ final appRoutes = GoRouter(
       builder: (context, state) => HomeView(),
       routes: [
         GoRoute(
-          path: 'inbox/:user',
+          path: 'inbox',
           name: RouteName.inbox,
           builder: (context, state) {
-            final String user = state.pathParameters['user']!;
-            return InboxView(user: user);
+            final String userEmail = state.uri.queryParameters['userEmail']!;
+            final String userId = state.uri.queryParameters['userId']!;
+            return InboxView(userEmail: userEmail, userId: userId);
           },
         ),
       ],
