@@ -1,5 +1,6 @@
 import 'package:chat_app_demo/services/auth/auth_gate.dart';
 import 'package:chat_app_demo/view/home_view.dart';
+import 'package:chat_app_demo/view/inbox_view.dart';
 import 'package:chat_app_demo/view/login_view.dart';
 import 'package:chat_app_demo/view/register_view.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +24,16 @@ final appRoutes = GoRouter(
       path: '/home',
       name: RouteName.home,
       builder: (context, state) => HomeView(),
+      routes: [
+        GoRoute(
+          path: 'inbox/:user',
+          name: RouteName.inbox,
+          builder: (context, state) {
+            final String user = state.pathParameters['user']!;
+            return InboxView(user: user);
+          },
+        ),
+      ],
       // redirect: (context, state) {
       //   if (!isLoggedIn) {
       //     return '/login';
@@ -59,4 +70,5 @@ class RouteName {
   static const String home = 'home';
   static const String login = 'login';
   static const String register = 'register';
+  static const String inbox = 'inbox';
 }

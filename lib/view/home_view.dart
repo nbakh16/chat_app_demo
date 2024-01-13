@@ -1,3 +1,4 @@
+import 'package:chat_app_demo/core/config/routes.dart';
 import 'package:chat_app_demo/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -96,11 +97,20 @@ class HomeView extends StatelessWidget {
 
   Widget _buildUserListItem(
       BuildContext context, Map<String, dynamic> userData) {
-    return ListTile(
-      onTap: () {},
-      title: Text(
-        userData['email'],
-      ),
-    );
+    if (userData['email'] != _auth.getCurrentUser()!.email) {
+      return ListTile(
+        onTap: () {
+          context.goNamed(
+            RouteName.inbox,
+            pathParameters: {'user': userData['email']},
+          );
+        },
+        title: Text(
+          userData['email'],
+        ),
+      );
+    } else {
+      return const SizedBox();
+    }
   }
 }
