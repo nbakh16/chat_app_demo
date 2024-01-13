@@ -62,6 +62,7 @@ class LoginView extends StatelessWidget {
                     12.height,
                     MyTextFormField(
                       controller: _passTEController,
+                      obscureText: true,
                       hintText: 'Password',
                     ),
                   ],

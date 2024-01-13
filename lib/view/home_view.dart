@@ -8,9 +8,10 @@ import '../services/auth/auth_service.dart';
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  void logout() async {
+  void logout(BuildContext context) async {
     try {
       AuthService().logoutUser();
+      context.goNamed(RouteName.login);
     } catch (e) {
       Logger().e('Logout ERROR: $e');
     }
@@ -24,9 +25,10 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome'),
+        backgroundColor: Theme.of(context).colorScheme.background,
         actions: [
           IconButton(
-            onPressed: logout,
+            onPressed: () => logout(context),
             icon: const Icon(Icons.logout),
           ),
         ],

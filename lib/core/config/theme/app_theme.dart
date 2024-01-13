@@ -7,14 +7,14 @@ class AppTheme {
 
   static ThemeData defaultTheme = ThemeData(
     colorScheme: ColorScheme.light(
-      background: Colors.grey.shade300,
+      background: Colors.grey.shade100,
       primary: Colors.grey.shade500,
       secondary: Colors.grey.shade200,
       tertiary: Colors.white,
       inversePrimary: Colors.grey.shade900,
     ),
     textTheme: kTextTheme(kTextColor),
-    scaffoldBackgroundColor: Colors.grey.shade300,
+    scaffoldBackgroundColor: Colors.grey.shade100,
   );
 
   static ThemeData darkTheme = ThemeData(

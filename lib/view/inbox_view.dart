@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../widgets/chat_bubble.dart';
 
 class InboxView extends StatefulWidget {
-  InboxView({super.key, required this.userEmail, required this.userId});
+  const InboxView({super.key, required this.userEmail, required this.userId});
   final String userEmail, userId;
 
   @override
@@ -75,6 +75,7 @@ class _InboxViewState extends State<InboxView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.userEmail),
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: Column(
         children: [
@@ -126,7 +127,7 @@ class _InboxViewState extends State<InboxView> {
 
   Widget _buildMessageInput() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
       child: Row(
         children: [
           Expanded(

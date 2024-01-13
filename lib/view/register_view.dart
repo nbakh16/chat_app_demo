@@ -65,12 +65,20 @@ class RegisterView extends StatelessWidget {
                     12.height,
                     MyTextFormField(
                       controller: _passTEController,
+                      obscureText: true,
                       hintText: 'Password',
                     ),
                     12.height,
                     MyTextFormField(
                       controller: _conPassTEController,
+                      obscureText: true,
                       hintText: 'Confirm Password',
+                      validator: (value) {
+                        if (value != _passTEController.text) {
+                          return "Password didn't match";
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
