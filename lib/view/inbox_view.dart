@@ -117,7 +117,6 @@ class _InboxViewState extends State<InboxView> {
 
     return Align(
       alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-      // child: Text(data['message']),
       child: ChatBubble(
         msg: data['message'],
         isCurrentUser: isCurrentUser,

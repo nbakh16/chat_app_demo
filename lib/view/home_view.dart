@@ -106,12 +106,12 @@ class HomeView extends StatelessWidget {
             context.goNamed(RouteName.inbox,
                 // pathParameters: {'user': userData['email']},
                 queryParameters: {
-                  'userEmail': userData['email'],
+                  'userEmail': userData['email'].toString().split('@').first,
                   'userId': userData['uid']
                 });
           },
           title: Text(
-            userData['email'],
+            userData['email'].toString().split('@').first,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           leading: const CircleAvatar(
