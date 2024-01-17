@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 
-Color kPrimaryColor = const Color(0xff050505);
-const Color kTitleColor = Color(0xff222222);
+const Color kPrimaryColor = Color(0xff0EAB8B);
+const Color kPrimaryDarkColor = Color(0xff005947);
+const Color kTitleColor = Color(0xff161616);
 const Color kTextColor = Color(0xff222222);
-const Color kTextColorLight = Color(0xff828282);
-const Color kTextLightColor = Color(0xff828282);
-const Color kLightGrey = Color(0xfff2f2f2);
+const Color kTextLightColor = Color(0xff757575);
 
-const Color kDisabledColor = Color(0xff828282);
-const Color kDisabledTextColor = Color(0xff9F9F9F);
-
-// common
 const Color kScaffoldBGColor = Colors.white;
 const Color kDangerColor = Color(0xffF53D43);
+const Color kRedLight = Color(0xffEC7979);
+const Color kDisabledColor = Color(0xffEEEEEE);
+const Color kDisabledTextColor = Color(0xff9F9F9F);
+const Color kBtnBackDisableColor = Color(0xffDBDBDB);
 const Color kSuccessColor = Color(0xff19B265);
 const Color kInfoColor = Color.fromARGB(255, 2, 120, 255);
+const Color kAppbarTextColor = Color(0xff1C1B1F);
+const Color kHintTextColor = Color(0xff999999);
+const Color kContainerBorderColor = Color(0xff0EAB8B);
+const Color kBtnTextColor = Color(0xffFFFFFF);
+const Color kBtnBackgroundColor = Color(0xff0EAB8B);
+const Color kBtnDisableColor = Color(0xff7B7878);
+const Color kTextDisableColor = Color(0xff7A7A7A);
+const Color kBorderColor = Color.fromARGB(89, 159, 159, 159);
+const Color kCardColor = Color(0xffF3F3F3);
 
 // override color
 const Color kWhite = Colors.white;
 const Color kRed = Colors.red;
 const Color kBlack = Colors.black;
 const Color kYellow = Color(0xffFFCA1E);
-
-const Color kLightGreen = Color(0xFF19B265);
-const Color kLightRed = Color(0xFFF53D43);
 
 // gradiant color
 // const LinearGradient kBtnGradiantColor = LinearGradient(
