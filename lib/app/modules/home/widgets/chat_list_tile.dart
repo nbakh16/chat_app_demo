@@ -1,7 +1,6 @@
 import 'package:chat_app_demo/app/widgets/my_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../data/config/theme/color.dart';
 import '../../../data/config/theme/style.dart';
 
@@ -26,6 +25,8 @@ class ChatListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double avatarSize = 30.r;
+
     return ListTile(
       onTap: onTap,
       tileColor: isRead ? kWhite : Colors.grey.shade200,
@@ -34,10 +35,10 @@ class ChatListTile extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            radius: 30.r,
+            radius: avatarSize,
             backgroundColor: kPrimaryColor.withOpacity(0.5),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.r),
+              borderRadius: BorderRadius.circular(avatarSize),
               child: MyNetworkImage(imageUrl: userImage),
             ),
           ),

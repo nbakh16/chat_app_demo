@@ -1,6 +1,9 @@
+import 'package:chat_app_demo/app/data/config/theme/color.dart';
+import 'package:chat_app_demo/app/data/config/theme/style.dart';
 import 'package:chat_app_demo/app/modules/home/views/tabs/call_tab.dart';
 import 'package:chat_app_demo/app/modules/home/views/tabs/chat_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
@@ -9,19 +12,14 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
       body: DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: const Color(0xffFFFFFF),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 0,
-            backgroundColor: const Color(0xffFFFFFF),
-            title: Text('Message'),
+            backgroundColor: kWhite,
+            title: const Text('Pro Chat'),
             bottom: PreferredSize(
               preferredSize:
                   Size.fromHeight(MediaQuery.of(context).size.height * .15),
@@ -36,18 +34,25 @@ class HomeView extends GetView<HomeController> {
                         onTap: () {},
                         child: Container(
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(22.r),
                             border: Border.all(
-                              width: 1,
+                              width: 1.75,
                               color: Colors.black45,
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                               child: Padding(
-                            padding: EdgeInsets.only(left: 12.0),
+                            padding: const EdgeInsets.only(left: 14.0),
                             child: Row(
                               children: [
-                                Icon(Icons.search),
-                                Text('Search for a name'),
+                                const Icon(
+                                  Icons.search,
+                                  color: kTextLightColor,
+                                ),
+                                const SizedBox(width: 8),
+                                Text('Search',
+                                    style: kBodyLarge.copyWith(
+                                        color: kTextLightColor)),
                               ],
                             ),
                           )),

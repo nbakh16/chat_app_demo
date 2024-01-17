@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../data/config/theme/color.dart';
 import '../../../data/config/theme/style.dart';
 import '../../../widgets/my_network_image.dart';
@@ -22,6 +21,8 @@ class CallListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double avatarSize = 30.r;
+
     return ListTile(
         onTap: onTap,
         tileColor: kWhite,
@@ -30,10 +31,10 @@ class CallListTile extends StatelessWidget {
           alignment: Alignment.bottomRight,
           children: [
             CircleAvatar(
-              radius: 30.r,
+              radius: avatarSize,
               backgroundColor: kPrimaryColor.withOpacity(0.5),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.r),
+                borderRadius: BorderRadius.circular(avatarSize),
                 child: MyNetworkImage(imageUrl: userImage),
               ),
             ),
@@ -59,7 +60,7 @@ class CallListTile extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: Icon(
+        trailing: const Icon(
           Icons.phone,
           color: kPrimaryColor,
         ));

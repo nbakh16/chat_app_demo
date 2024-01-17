@@ -42,4 +42,13 @@ class HomeController extends GetxController {
       isSentByMe: false,
     ),
   ];
+
+  void sendMessage() {
+    if (msgTEController.text.isNotEmpty) {
+      messages.add(
+          MessageModel(message: msgTEController.text.trim(), isSentByMe: true));
+      msgTEController.clear();
+      update();
+    }
+  }
 }

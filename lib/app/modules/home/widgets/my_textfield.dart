@@ -24,8 +24,8 @@ class MyTextFormField extends StatelessWidget {
   });
 
   final String hintText;
-  final IconData? prefixIcon;
-  final IconData? suffixIcon;
+  final Icon? prefixIcon;
+  final Icon? suffixIcon;
   final int maxLines;
   final bool obscureText;
   final bool readOnly;
@@ -50,16 +50,17 @@ class MyTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       onFieldSubmitted: onFieldSubmitted,
+      style: kBodyLarge,
       decoration: InputDecoration(
         hintText: hintText,
         // labelText: hintText,
         hintStyle: kBodyLarge.copyWith(color: kTextLightColor),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(width: 1.5)),
-        prefixIcon: Icon(prefixIcon),
-        suffixIcon: Icon(suffixIcon),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
       validator: validate,
       onChanged: onChanged,
