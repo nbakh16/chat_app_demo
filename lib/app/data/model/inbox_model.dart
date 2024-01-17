@@ -22,10 +22,12 @@ class InboxModel {
 
 class MessageModel {
   String message;
+  bool isImage;
   bool isSentByMe;
 
   MessageModel({
     required this.message,
+    required this.isImage,
     required this.isSentByMe,
   });
 }

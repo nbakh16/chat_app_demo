@@ -54,13 +54,13 @@ class ChatListTile extends StatelessWidget {
       ),
       title: Text(
         userName,
-        style: kTitleSmall,
+        style: kTitleMedium,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         message,
-        style: kBodyMedium,
+        style: kBodyLarge,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -77,21 +77,21 @@ class ChatListTile extends StatelessWidget {
               // ),
               Icon(
                 Icons.check_box,
-                size: 12,
-                color: isRead ? kPrimaryColor : kTextLightColor,
+                size: 16.r,
+                color: isRead ? kTextLightColor : kPrimaryColor,
               ),
               const SizedBox(width: 4),
-              Text(time, style: kBodySmall)
+              Text(time, style: kBodyMedium)
             ],
           ),
           const SizedBox(height: 12),
           isRead
               ? const SizedBox()
               : CircleAvatar(
-                  radius: 9.r,
+                  radius: 11.r,
                   backgroundColor: kPrimaryColor,
                   child: Text(messageCount.toString(),
-                      style: kBodySmall.copyWith(color: kScaffoldBGColor)),
+                      style: kBodyMedium.copyWith(color: kScaffoldBGColor)),
                 )
         ],
       ),

@@ -33,7 +33,7 @@ class MyTextFormField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextEditingController? controller;
   final String? Function(String?)? validate;
-  final String? Function(String?)? onChanged;
+  final void Function(String?)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final void Function()? onTap;
   final void Function()? onTapSuffix;

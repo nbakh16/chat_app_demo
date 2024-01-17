@@ -1,3 +1,4 @@
+import 'package:chat_app_demo/app/data/config/theme/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -30,24 +31,42 @@ class HomeController extends GetxController {
   ];
 
   TextEditingController msgTEController = TextEditingController();
+  bool isSendBtnVisible = false;
+  void toggleSendButtonVisibility(String? value) {
+    if (value == null || value.isEmpty) {
+      isSendBtnVisible = false;
+    } else {
+      isSendBtnVisible = true;
+    }
+    update();
+  }
 
   List<MessageModel> messages = [
     MessageModel(
       message: 'Hello, Good morning.',
+      isImage: false,
       isSentByMe: false,
     ),
     MessageModel(
       message:
           'I have booked your house cleaning service. Waiting for your reply. Let me know when you\'re available.',
+      isImage: false,
       isSentByMe: false,
     ),
   ];
 
-  void sendMessage() {
+  String? imgString;
+  void sendMessage({bool isImage = false, String? msg}) {
     if (msgTEController.text.isNotEmpty) {
-      messages.add(
-          MessageModel(message: msgTEController.text.trim(), isSentByMe: true));
+      messages.add(MessageModel(
+          message: msg ?? msgTEController.text.trim(),
+          isSentByMe: true,
+          isImage: isImage));
+
+      kLogger.w(imgString);
+
       msgTEController.clear();
+      isSendBtnVisible = false;
       update();
     }
   }

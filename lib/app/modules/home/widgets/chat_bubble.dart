@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/config/theme/color.dart';
@@ -8,10 +11,12 @@ class ChatBubble extends StatelessWidget {
   const ChatBubble({
     super.key,
     required this.msg,
+    this.isImage = false,
     required this.isSentByMe,
   });
 
   final String msg;
+  final bool isImage;
   final bool isSentByMe;
 
   @override
@@ -28,10 +33,18 @@ class ChatBubble extends StatelessWidget {
           color: isSentByMe ? kPrimaryColor.withOpacity(0.25) : kWhite,
           borderRadius: BorderRadius.circular(12.r),
         ),
-        child: Text(
-          msg,
-          style: kBodyLarge.copyWith(fontSize: 18),
-        ),
+        child: !isImage
+            ? Text(
+                msg,
+                style: kBodyLarge.copyWith(fontSize: 18),
+              )
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: Image.file(
+                  File(msg),
+                  fit: BoxFit.cover,
+                ),
+              ),
       ),
     );
   }
