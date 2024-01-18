@@ -87,14 +87,29 @@ class ChatListTile extends StatelessWidget {
           const SizedBox(height: 12),
           isRead
               ? const SizedBox()
-              : CircleAvatar(
-                  radius: 11.r,
-                  backgroundColor: kPrimaryColor,
-                  child: Center(
-                    child: Text(messageCount.toString(),
-                        style: kBodyMedium.copyWith(color: kScaffoldBGColor)),
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    height: 16,
+                    width: 16,
+                    child: ColoredBox(
+                      color: kPrimaryColor,
+                      child: Center(
+                        child: Text(messageCount.toString(),
+                            style:
+                                kBodySmall.copyWith(color: kScaffoldBGColor)),
+                      ),
+                    ),
                   ),
-                )
+                ),
+          // : CircleAvatar(
+          //     radius: 11.r,
+          //     backgroundColor: kPrimaryColor,
+          //     child: Center(
+          //       child: Text(messageCount.toString(),
+          //           style: kBodyMedium.copyWith(color: kScaffoldBGColor)),
+          //     ),
+          //   )
         ],
       ),
     );
