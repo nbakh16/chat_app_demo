@@ -1,4 +1,3 @@
-import 'package:chat_app_demo/app/data/config/theme/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +19,7 @@ class HomeController extends GetxController {
     ),
     InboxModel(
         userImage:
-            "https://static.photocdn.pt/images/articles/2019/08/07/images/articles/2019/07/31/linkedin_photo_tips.webp",
+            "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg",
         userName: 'Asma Begum',
         message: 'I have booked your house cleaning service.',
         messageCount: 2,
@@ -55,19 +54,16 @@ class HomeController extends GetxController {
     ),
   ];
 
-  String? imgString;
-  void sendMessage({bool isImage = false, String? msg}) {
-    if (msgTEController.text.isNotEmpty) {
-      messages.add(MessageModel(
-          message: msg ?? msgTEController.text.trim(),
+  void sendMessage({String? image}) {
+    messages.add(
+      MessageModel(
+          message: image ?? msgTEController.text.trim(),
           isSentByMe: true,
-          isImage: isImage));
+          isImage: image != null ? true : false),
+    );
 
-      kLogger.w(imgString);
-
-      msgTEController.clear();
-      isSendBtnVisible = false;
-      update();
-    }
+    msgTEController.clear();
+    isSendBtnVisible = false;
+    update();
   }
 }

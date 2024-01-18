@@ -90,8 +90,10 @@ class ChatListTile extends StatelessWidget {
               : CircleAvatar(
                   radius: 11.r,
                   backgroundColor: kPrimaryColor,
-                  child: Text(messageCount.toString(),
-                      style: kBodyMedium.copyWith(color: kScaffoldBGColor)),
+                  child: Center(
+                    child: Text(messageCount.toString(),
+                        style: kBodyMedium.copyWith(color: kScaffoldBGColor)),
+                  ),
                 )
         ],
       ),

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/config/theme/color.dart';
@@ -38,11 +37,15 @@ class ChatBubble extends StatelessWidget {
                 msg,
                 style: kBodyLarge.copyWith(fontSize: 18),
               )
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
-                child: Image.file(
-                  File(msg),
-                  fit: BoxFit.cover,
+            : SizedBox(
+                height: 225,
+                width: MediaQuery.sizeOf(context).width * 0.6,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.r),
+                  child: Image.file(
+                    File(msg),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
       ),
