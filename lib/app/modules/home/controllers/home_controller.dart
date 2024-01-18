@@ -54,13 +54,27 @@ class HomeController extends GetxController {
     ),
   ];
 
-  void sendMessage({String? image}) {
-    messages.add(
-      MessageModel(
-          message: image ?? msgTEController.text.trim(),
-          isSentByMe: true,
-          isImage: image != null ? true : false),
-    );
+  void sendMessage({List<String>? images}) {
+    if (images == null || images.isEmpty) {
+      messages.add(
+        MessageModel(
+            message: msgTEController.text.trim(),
+            isSentByMe: true,
+            isImage: false),
+      );
+    } else {
+      for (String image in images) {
+        messages.add(
+          MessageModel(message: image, isSentByMe: true, isImage: true),
+        );
+      }
+    }
+    // messages.add(
+    //   MessageModel(
+    //       message: msgTEController.text.trim(),
+    //       isSentByMe: true,
+    //       isImage: image != null ? true : false),
+    // );
 
     msgTEController.clear();
     isSendBtnVisible = false;

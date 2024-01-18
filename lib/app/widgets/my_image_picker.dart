@@ -102,10 +102,15 @@ class MyImagePicker {
     List<XFile> imageList = [];
     final List<XFile> images = await picker.pickMultiImage();
     if (images.isNotEmpty) {
-      final int limit = images.length >= 3 ? 3 : images.length;
-      for (int i = 0; i < limit; i++) {
+      for (var i = 0; i < images.length; i++) {
         imageList.add(images[i]);
       }
+
+      ///image limit
+      // final int limit = images.length >= 3 ? 3 : images.length;
+      // for (int i = 0; i < limit; i++) {
+      //   imageList.add(images[i]);
+      // }
 
       // if (images.length > 3) {
       //   showCustomSnackbar(

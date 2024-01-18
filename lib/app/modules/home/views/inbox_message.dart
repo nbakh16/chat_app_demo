@@ -66,8 +66,14 @@ class _InboxMessageState extends State<InboxMessage> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    await MyImagePicker.pickImage().then((value) {
-                      controller.sendMessage(image: value!.path);
+                    // await MyImagePicker.pickImage().then((value) {
+                    //   controller.sendMessage(image: value!.path);
+                    // }).catchError((error) {
+                    //   kLogger.e('Image pick error: $error');
+                    // });
+                    await MyImagePicker.pickMultipleImage().then((value) {
+                      List<String> images = value!.map((e) => e.path).toList();
+                      controller.sendMessage(images: images);
                     }).catchError((error) {
                       kLogger.e('Image pick error: $error');
                     });
