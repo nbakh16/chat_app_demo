@@ -60,7 +60,7 @@ class _InboxMessageState extends State<InboxMessage> {
       bottomSheet: ColoredBox(
         color: Colors.grey.shade300,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 25.h),
+          padding: EdgeInsets.fromLTRB(12.w, 6.h, 12.w, 25.h),
           child: GetBuilder<HomeController>(builder: (controller) {
             return Row(
               children: [
