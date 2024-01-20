@@ -58,13 +58,13 @@ class HomeController extends GetxController {
 
   void sendImage() async {
     await MyImagePicker.getImageSource().then((value) {
-      if (value) {
+      if (value != null && value) {
         MyImagePicker.pickImage().then((value) {
           sendMessage(images: [value!.path]);
         }).catchError((error) {
           kLogger.e('Camera error: $error');
         });
-      } else {
+      } else if (value != null && !value) {
         MyImagePicker.pickMultipleImage().then((value) {
           List<String> images = value!.map((e) => e.path).toList();
           sendMessage(images: images);

@@ -35,8 +35,8 @@ class MyImagePicker {
   //   }
   // }
 
-  static Future<bool> getImageSource() async {
-    return await Get.dialog(
+  static Future<bool?> getImageSource() async {
+    final result = await Get.dialog(
       AlertDialog(
         title: Text(
           "Select Image Source",
@@ -79,6 +79,7 @@ class MyImagePicker {
         ),
       ),
     );
+    return result;
   }
 
   static Future<XFile?> pickImage() async {
