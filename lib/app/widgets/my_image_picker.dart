@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,21 +21,21 @@ class MyImagePicker {
     }
   }
 
-  static Future<File> pickImageAndCrop() async {
-    final XFile? image = await pickImage();
-    if (image != null) {
-      final CroppedFile? croppedFile = await cropImage(sourcePath: image.path);
-      if (croppedFile != null) {
-        return File(croppedFile.path);
-      } else {
-        throw Exception("Image not cropped");
-      }
-    } else {
-      throw Exception("Image not selected");
-    }
-  }
+  // static Future<File> pickImageAndCrop() async {
+  //   final XFile? image = await pickImage();
+  //   if (image != null) {
+  //     final CroppedFile? croppedFile = await cropImage(sourcePath: image.path);
+  //     if (croppedFile != null) {
+  //       return File(croppedFile.path);
+  //     } else {
+  //       throw Exception("Image not cropped");
+  //     }
+  //   } else {
+  //     throw Exception("Image not selected");
+  //   }
+  // }
 
-  static Future<ImageSource> getImageSource() async {
+  static Future<bool> getImageSource() async {
     return await Get.dialog(
       AlertDialog(
         title: Text(
@@ -51,9 +50,7 @@ class MyImagePicker {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(
-                Icons.camera,
-              ),
+              leading: const Icon(Icons.camera),
               title: Text(
                 "Camera",
                 style: TextStyle(
@@ -62,13 +59,11 @@ class MyImagePicker {
                 ),
               ),
               onTap: () {
-                Get.back(result: ImageSource.camera);
+                Get.back(result: true);
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.photo,
-              ),
+              leading: const Icon(Icons.photo),
               title: Text(
                 "Gallery",
                 style: TextStyle(
@@ -77,7 +72,7 @@ class MyImagePicker {
                 ),
               ),
               onTap: () {
-                Get.back(result: ImageSource.gallery);
+                Get.back(result: false);
               },
             ),
           ],
@@ -88,8 +83,7 @@ class MyImagePicker {
 
   static Future<XFile?> pickImage() async {
     final picker = ImagePicker();
-    final imageSource = await getImageSource();
-    final XFile? image = await picker.pickImage(source: imageSource);
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       return image;
     } else {

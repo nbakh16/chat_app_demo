@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../data/config/theme/color.dart';
 import '../../../data/config/theme/style.dart';
-import '../../../widgets/my_image_picker.dart';
 import '../../../widgets/my_network_image.dart';
 import '../widgets/chat_bubble.dart';
 import '../widgets/my_textfield.dart';
@@ -69,19 +68,7 @@ class _InboxMessageState extends State<InboxMessage> {
             return Row(
               children: [
                 IconButton(
-                  onPressed: () async {
-                    // await MyImagePicker.pickImage().then((value) {
-                    //   controller.sendMessage(image: value!.path);
-                    // }).catchError((error) {
-                    //   kLogger.e('Image pick error: $error');
-                    // });
-                    await MyImagePicker.pickMultipleImage().then((value) {
-                      List<String> images = value!.map((e) => e.path).toList();
-                      controller.sendMessage(images: images);
-                    }).catchError((error) {
-                      kLogger.e('Image pick error: $error');
-                    });
-                  },
+                  onPressed: controller.sendImage,
                   icon: const Icon(
                     Icons.camera_alt,
                     color: kPrimaryColor,

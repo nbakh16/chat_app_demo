@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../data/config/theme/style.dart';
 import '../../../data/model/inbox_model.dart';
+import '../../../widgets/my_image_picker.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -54,6 +56,25 @@ class HomeController extends GetxController {
     ),
   ];
 
+  void sendImage() async {
+    await MyImagePicker.getImageSource().then((value) {
+      if (value) {
+        MyImagePicker.pickImage().then((value) {
+          sendMessage(images: [value!.path]);
+        }).catchError((error) {
+          kLogger.e('Camera error: $error');
+        });
+      } else {
+        MyImagePicker.pickMultipleImage().then((value) {
+          List<String> images = value!.map((e) => e.path).toList();
+          sendMessage(images: images);
+        }).catchError((error) {
+          kLogger.e('Image pick error: $error');
+        });
+      }
+    });
+  }
+
   void sendMessage({List<String>? images}) {
     if (images == null || images.isEmpty) {
       messages.add(
@@ -69,13 +90,6 @@ class HomeController extends GetxController {
         );
       }
     }
-    // messages.add(
-    //   MessageModel(
-    //       message: msgTEController.text.trim(),
-    //       isSentByMe: true,
-    //       isImage: image != null ? true : false),
-    // );
-
     msgTEController.clear();
     isSendBtnVisible = false;
     update();
