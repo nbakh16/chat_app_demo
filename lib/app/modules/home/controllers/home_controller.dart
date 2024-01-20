@@ -1,3 +1,5 @@
+import 'package:chat_app_demo/app/data/config/my_converter.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -45,16 +47,32 @@ class HomeController extends GetxController {
   List<MessageModel> messages = [
     MessageModel(
       message: 'Hello, Good morning.',
-      isImage: false,
       isSentByMe: false,
     ),
     MessageModel(
       message:
           'I have booked your house cleaning service. Waiting for your reply. Let me know when you\'re available.',
-      isImage: false,
       isSentByMe: false,
     ),
   ];
+
+  PlatformFile? platformFile;
+  void sendFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc'],
+    );
+
+    if (result != null) {
+      // Load result and file details
+      String formattedSize = MyConverter.formatBytes(result.files.first.size);
+      platformFile = result.files.first;
+      // controller.attachedFile = result.files.single.path!;
+      sendMessage(text: '${result.files.first.name} ($formattedSize)');
+    } else {
+      // User canceled the picker
+    }
+  }
 
   void sendImage() async {
     await MyImagePicker.getImageSource().then((value) {
@@ -75,13 +93,14 @@ class HomeController extends GetxController {
     });
   }
 
-  void sendMessage({List<String>? images}) {
+  void sendMessage({List<String>? images, String? text}) {
     if (images == null || images.isEmpty) {
       messages.add(
         MessageModel(
-            message: msgTEController.text.trim(),
-            isSentByMe: true,
-            isImage: false),
+          message: text ?? msgTEController.text.trim(),
+          isSentByMe: true,
+          isFile: text != null ? true : false,
+        ),
       );
     } else {
       for (String image in images) {

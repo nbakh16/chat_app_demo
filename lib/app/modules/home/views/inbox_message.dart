@@ -31,7 +31,7 @@ class _InboxMessageState extends State<InboxMessage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         foregroundColor: kWhite,
@@ -63,7 +63,7 @@ class _InboxMessageState extends State<InboxMessage> {
         ),
       ),
       bottomSheet: ColoredBox(
-        color: Colors.grey.shade300,
+        color: Colors.grey.shade100,
         child: Padding(
           padding: EdgeInsets.fromLTRB(12.w, 6.h, 12.w, 25.h),
           child: GetBuilder<HomeController>(builder: (controller) {
@@ -73,6 +73,13 @@ class _InboxMessageState extends State<InboxMessage> {
                   onPressed: controller.sendImage,
                   icon: const Icon(
                     Icons.camera_alt,
+                    color: kPrimaryColor,
+                  ),
+                ),
+                IconButton(
+                  onPressed: controller.sendFile,
+                  icon: const Icon(
+                    Icons.attach_file,
                     color: kPrimaryColor,
                   ),
                 ),
@@ -132,6 +139,7 @@ class _InboxMessageState extends State<InboxMessage> {
                 return ChatBubble(
                   msg: msg.message,
                   isImage: msg.isImage,
+                  isFile: msg.isFile,
                   isSentByMe: msg.isSentByMe,
                 );
               },

@@ -23,11 +23,13 @@ class InboxModel {
 class MessageModel {
   String message;
   bool isImage;
+  bool isFile;
   bool isSentByMe;
 
   MessageModel({
     required this.message,
-    required this.isImage,
+    this.isImage = false,
+    this.isFile = false,
     required this.isSentByMe,
   });
 }

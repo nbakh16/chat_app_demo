@@ -11,11 +11,13 @@ class ChatBubble extends StatelessWidget {
     super.key,
     required this.msg,
     this.isImage = false,
+    this.isFile = false,
     required this.isSentByMe,
   });
 
   final String msg;
   final bool isImage;
+  final bool isFile;
   final bool isSentByMe;
 
   @override
@@ -29,39 +31,47 @@ class ChatBubble extends StatelessWidget {
         padding: EdgeInsets.all(12.r),
         margin: EdgeInsets.only(bottom: 12.r),
         decoration: BoxDecoration(
-          color: isSentByMe ? kPrimaryColor.withOpacity(0.25) : kWhite,
+          color: isSentByMe ? kPrimaryColor.withOpacity(0.1) : kWhite,
           borderRadius: BorderRadius.circular(12.r),
         ),
-        child: !isImage
-            ? Text(
+        child: Visibility(
+          visible: isImage || isFile,
+          replacement: Text(
+            msg,
+            style: kBodyLarge.copyWith(fontSize: 18),
+          ),
+          child: Visibility(
+            visible: isImage,
+            replacement: GestureDetector(
+              onTap: () {},
+              child: Text(
                 msg,
-                style: kBodyLarge.copyWith(fontSize: 18),
-              )
-            : SizedBox(
-                height: 225,
-                width: MediaQuery.sizeOf(context).width * 0.6,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: GestureDetector(
-                    onTap: () => MyShowDialog.imageShowDialog(context, msg),
-                    child: Image.file(
-                      File(msg),
-                      fit: BoxFit.cover,
-                    ),
+                style: const TextStyle(
+                  color: kPrimaryColor,
+                  decoration: TextDecoration.underline,
+                  decorationColor: kPrimaryColor,
+                  decorationThickness: 2,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            child: SizedBox(
+              height: 225,
+              width: MediaQuery.sizeOf(context).width * 0.6,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: GestureDetector(
+                  onTap: () => MyShowDialog.imageShowDialog(context, msg),
+                  child: Image.file(
+                    File(msg),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-        // : SizedBox(
-        //     height: 225,
-        //     width: MediaQuery.sizeOf(context).width * 0.6,
-        //     child: ClipRRect(
-        //       borderRadius: BorderRadius.circular(12.r),
-        //       child: Image.file(
-        //         File(msg),
-        //         fit: BoxFit.cover,
-        //       ),
-        //     ),
-        //   ),
+            ),
+          ),
+        ),
       ),
     ).animate().fade(duration: 200.ms).slideY(duration: 250.ms, begin: 1);
   }
