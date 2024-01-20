@@ -26,6 +26,8 @@ class InboxMessage extends StatefulWidget {
 }
 
 class _InboxMessageState extends State<InboxMessage> {
+  ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,12 +77,22 @@ class _InboxMessageState extends State<InboxMessage> {
                   ),
                 ),
                 Expanded(
-                  child: MyTextFormField(
-                    controller: controller.msgTEController,
-                    hintText: 'Write message...',
-                    textInputAction: TextInputAction.send,
-                    onFieldSubmitted: (_) => controller.sendMessage(),
-                    onChanged: controller.toggleSendButtonVisibility,
+                  child: RawScrollbar(
+                    controller: _scrollController,
+                    thumbColor: kPrimaryColor.withOpacity(0.5),
+                    thickness: 3.0,
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 0.0),
+                      child: MyTextFormField(
+                        scrollController: _scrollController,
+                        controller: controller.msgTEController,
+                        hintText: 'Write message...',
+                        textInputAction: TextInputAction.newline,
+                        // onFieldSubmitted: (_) => controller.sendMessage(),
+                        onChanged: controller.toggleSendButtonVisibility,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 6),
@@ -108,7 +120,7 @@ class _InboxMessageState extends State<InboxMessage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(25.w, 25.h, 25.w, 120.h),
+        padding: EdgeInsets.fromLTRB(25.w, 25.h, 25.w, 128.h),
         child: GetBuilder<HomeController>(
           builder: (controller) {
             return ListView.builder(

@@ -63,6 +63,6 @@ class ChatBubble extends StatelessWidget {
         //     ),
         //   ),
       ),
-    ).animate().fade(duration: 50.ms).slideY(duration: 150.ms, begin: 1);
+    ).animate().fade(duration: 200.ms).slideY(duration: 250.ms, begin: 1);
   }
 }

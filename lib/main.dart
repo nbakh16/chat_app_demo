@@ -1,3 +1,4 @@
+import 'package:chat_app_demo/app/data/config/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,13 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: "Chat UI",
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: kPrimaryColor,
+            selectionColor: kPrimaryColor.withOpacity(0.33),
+            selectionHandleColor: kPrimaryColor.withOpacity(0.8),
+          ),
+        ),
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
       ),
