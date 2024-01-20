@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:chat_app_demo/app/widgets/my_show_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../data/config/theme/color.dart';
 import '../../../data/config/theme/style.dart';
@@ -62,6 +63,6 @@ class ChatBubble extends StatelessWidget {
         //     ),
         //   ),
       ),
-    );
+    ).animate().fade(duration: 50.ms).slideY(duration: 150.ms, begin: 1);
   }
 }

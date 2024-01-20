@@ -15,10 +15,11 @@ class InboxMessage extends StatefulWidget {
       required this.image,
       required this.name,
       required this.lastSeen,
-      required this.isActive})
+      required this.isActive,
+      required this.heroTag})
       : super(key: key);
 
-  final String image, name, lastSeen;
+  final String image, name, lastSeen, heroTag;
   final bool isActive;
 
   @override
@@ -36,12 +37,15 @@ class _InboxMessageState extends State<InboxMessage> {
         elevation: 0,
         title: Row(
           children: [
-            CircleAvatar(
-              radius: 30.r,
-              backgroundColor: kPrimaryColor.withOpacity(0.5),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30.r),
-                child: MyNetworkImage(imageUrl: widget.image),
+            Hero(
+              tag: widget.heroTag,
+              child: CircleAvatar(
+                radius: 30.r,
+                backgroundColor: kPrimaryColor.withOpacity(0.5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.r),
+                  child: MyNetworkImage(imageUrl: widget.image),
+                ),
               ),
             ),
             SizedBox(width: 8.w),
@@ -88,7 +92,7 @@ class _InboxMessageState extends State<InboxMessage> {
                     controller: controller.msgTEController,
                     hintText: 'Write message...',
                     textInputAction: TextInputAction.send,
-                    onFieldSubmitted: (_) => controller.sendMessage,
+                    onFieldSubmitted: (_) => controller.sendMessage(),
                     onChanged: controller.toggleSendButtonVisibility,
                   ),
                 ),

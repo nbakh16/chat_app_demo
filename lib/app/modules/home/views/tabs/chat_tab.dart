@@ -28,6 +28,7 @@ class ChatTab extends StatelessWidget {
                       name: inbox.userName,
                       lastSeen: inbox.lastSeen,
                       isActive: inbox.isActive,
+                      heroTag: 'image$index',
                     ));
                 inbox.isRead = true;
                 controller.update();
@@ -39,6 +40,7 @@ class ChatTab extends StatelessWidget {
               time: inbox.time,
               isRead: inbox.isRead,
               isActive: inbox.isActive,
+              heroTag: 'image$index',
             );
           },
         );

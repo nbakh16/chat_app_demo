@@ -16,9 +16,10 @@ class ChatListTile extends StatelessWidget {
     this.isRead = true,
     this.isActive = true,
     this.onTap,
+    required this.heroTag,
   });
 
-  final String userImage, userName, message, time;
+  final String userImage, userName, message, time, heroTag;
   final int messageCount;
   final bool isRead, isActive;
   final void Function()? onTap;
@@ -34,12 +35,15 @@ class ChatListTile extends StatelessWidget {
         clipBehavior: Clip.none,
         alignment: Alignment.bottomRight,
         children: [
-          CircleAvatar(
-            radius: avatarSize,
-            backgroundColor: kPrimaryColor.withOpacity(0.5),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(avatarSize),
-              child: MyNetworkImage(imageUrl: userImage),
+          Hero(
+            tag: heroTag,
+            child: CircleAvatar(
+              radius: avatarSize,
+              backgroundColor: kPrimaryColor.withOpacity(0.5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(avatarSize),
+                child: MyNetworkImage(imageUrl: userImage),
+              ),
             ),
           ),
           Positioned(
