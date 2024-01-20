@@ -22,50 +22,61 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isEmoji = isFile && msg.split(' ').length <= 1;
     return Align(
       alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.sizeOf(context).width * 0.6,
-        ),
-        padding: EdgeInsets.all(12.r),
-        margin: EdgeInsets.only(bottom: 12.r),
-        decoration: BoxDecoration(
-          color: isSentByMe ? kPrimaryColor.withOpacity(0.1) : kWhite,
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Visibility(
-          visible: isImage || isFile,
-          replacement: Text(
-            msg,
-            style: kBodyLarge.copyWith(fontSize: 18),
-          ),
-          child: Visibility(
-            visible: isImage,
-            replacement: GestureDetector(
-              onTap: () {},
-              child: Text(
-                msg,
-                style: const TextStyle(
-                  color: kPrimaryColor,
-                  decoration: TextDecoration.underline,
-                  decorationColor: kPrimaryColor,
-                  decorationThickness: 2,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+      child: Card(
+        elevation: isEmoji ? 0 : 1.25,
+        color: Colors.transparent,
+        child: Expanded(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.sizeOf(context).width * 0.6,
             ),
-            child: SizedBox(
-              height: 225,
-              width: MediaQuery.sizeOf(context).width * 0.6,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
-                child: GestureDetector(
-                  onTap: () => MyShowDialog.imageShowDialog(context, msg),
-                  child: Image.file(
-                    File(msg),
-                    fit: BoxFit.cover,
+            padding: EdgeInsets.all(12.r),
+            // margin: EdgeInsets.only(bottom: 12.r),
+            decoration: BoxDecoration(
+              color: isEmoji
+                  ? Colors.transparent
+                  : isSentByMe
+                      ? const Color(0xffb2fdee)
+                      : kWhite,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Visibility(
+              visible: isImage || isFile,
+              replacement: Text(
+                msg,
+                style: kBodyLarge.copyWith(fontSize: 18),
+              ),
+              child: Visibility(
+                visible: isImage,
+                replacement: GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    msg,
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                      decorationThickness: isEmoji ? 0 : 1.5,
+                      fontSize: isEmoji ? 60 : 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                child: SizedBox(
+                  height: 225,
+                  width: MediaQuery.sizeOf(context).width * 0.6,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: GestureDetector(
+                      onTap: () => MyShowDialog.imageShowDialog(context, msg),
+                      child: Image.file(
+                        File(msg),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),

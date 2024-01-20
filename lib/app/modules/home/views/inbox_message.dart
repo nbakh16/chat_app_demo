@@ -89,34 +89,41 @@ class _InboxMessageState extends State<InboxMessage> {
                     thumbColor: kPrimaryColor.withOpacity(0.5),
                     thickness: 3.0,
                     padding: const EdgeInsets.only(right: 8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 0.0),
-                      child: MyTextFormField(
-                        scrollController: _scrollController,
-                        controller: controller.msgTEController,
-                        hintText: 'Write message...',
-                        textInputAction: TextInputAction.newline,
-                        // onFieldSubmitted: (_) => controller.sendMessage(),
-                        onChanged: controller.toggleSendButtonVisibility,
-                      ),
+                    child: MyTextFormField(
+                      scrollController: _scrollController,
+                      controller: controller.msgTEController,
+                      hintText: 'Write message...',
+                      textInputAction: TextInputAction.newline,
+                      // onFieldSubmitted: (_) => controller.sendMessage(),
+                      onChanged: controller.toggleSendButtonVisibility,
                     ),
                   ),
                 ),
                 const SizedBox(width: 6),
                 Visibility(
                   visible: controller.isSendBtnVisible,
-                  replacement: const SizedBox(),
+                  replacement: IconButton(
+                    onPressed: () {
+                      controller.sendMessage(text: '\u{1F44D}');
+                    },
+                    icon: Text(
+                      '\u{1F44D}',
+                      style: kHeadlineMedium,
+                    ),
+                  ),
                   child: Container(
+                    height: 50,
+                    width: 50,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: IconButton(
                       onPressed: controller.sendMessage,
                       icon: const Icon(
                         Icons.send,
                         color: kWhite,
-                        size: 28,
+                        size: 24,
                       ),
                     ),
                   ),
