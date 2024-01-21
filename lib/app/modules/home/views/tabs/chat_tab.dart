@@ -35,7 +35,7 @@ class ChatTab extends StatelessWidget {
               },
               userImage: inbox.userImage,
               userName: inbox.userName,
-              message: inbox.message,
+              message: controller.messages.last.message,
               messageCount: inbox.messageCount,
               time: inbox.time,
               isRead: inbox.isRead,

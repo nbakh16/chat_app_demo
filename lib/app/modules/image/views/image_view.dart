@@ -23,14 +23,21 @@ class ImageView extends GetView<ImageController> {
               Hero(
                 tag: controller.image,
                 child: Center(
-                  child: InteractiveViewer(
-                    maxScale: 8,
-                    minScale: 0.5,
-                    child: Image.file(
-                      File(controller.image),
-                      fit: BoxFit.fitWidth,
-                      height: double.infinity,
-                      width: double.infinity,
+                  child: GestureDetector(
+                    onDoubleTapDown: (details) =>
+                        controller.tapDownDetails = details,
+                    onDoubleTap: controller.doubleTapZoom,
+                    child: InteractiveViewer(
+                      transformationController:
+                          controller.transformationController,
+                      maxScale: 8,
+                      minScale: 0.5,
+                      child: Image.file(
+                        File(controller.image),
+                        fit: BoxFit.fitWidth,
+                        height: double.infinity,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
                 ),

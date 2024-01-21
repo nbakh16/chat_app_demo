@@ -67,7 +67,7 @@ class ChatBubble extends StatelessWidget {
               ),
               child: SizedBox(
                 height: 225,
-                // width: MediaQuery.sizeOf(context).width * 0.6,
+                width: MediaQuery.sizeOf(context).width * 0.6,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.r),
                   child: GestureDetector(
