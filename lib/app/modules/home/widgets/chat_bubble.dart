@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'package:chat_app_demo/app/widgets/my_show_dialog.dart';
+import 'package:chat_app_demo/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../data/config/theme/color.dart';
 import '../../../data/config/theme/style.dart';
+import 'package:get/get.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
@@ -71,10 +72,16 @@ class ChatBubble extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
                     child: GestureDetector(
-                      onTap: () => MyShowDialog.imageShowDialog(context, msg),
-                      child: Image.file(
-                        File(msg),
-                        fit: BoxFit.cover,
+                      onTap: () {
+                        // MyShowDialog.imageShowDialog(context, msg);
+                        Get.toNamed(Routes.IMAGE, arguments: msg);
+                      },
+                      child: Hero(
+                        tag: msg,
+                        child: Image.file(
+                          File(msg),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
