@@ -109,8 +109,34 @@ class HomeController extends GetxController {
         );
       }
     }
+    scrollDown();
     msgTEController.clear();
     isSendBtnVisible = false;
     update();
+  }
+
+  final ScrollController scrollController = ScrollController();
+
+  void scrollDown() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent + 350,
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void onInit() {
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => scrollDown(),
+    );
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    scrollController.dispose();
+    super.onClose();
   }
 }

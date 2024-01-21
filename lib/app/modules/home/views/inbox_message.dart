@@ -26,7 +26,7 @@ class InboxMessage extends StatefulWidget {
 }
 
 class _InboxMessageState extends State<InboxMessage> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,6 @@ class _InboxMessageState extends State<InboxMessage> {
                       controller: controller.msgTEController,
                       hintText: 'Write message...',
                       textInputAction: TextInputAction.newline,
-                      // onFieldSubmitted: (_) => controller.sendMessage(),
                       onChanged: controller.toggleSendButtonVisibility,
                     ),
                   ),
@@ -133,26 +132,26 @@ class _InboxMessageState extends State<InboxMessage> {
           }),
         ),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: EdgeInsets.fromLTRB(25.w, 25.h, 25.w, 128.h),
-        child: GetBuilder<HomeController>(
-          builder: (controller) {
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const ScrollPhysics(),
-              itemCount: controller.messages.length,
-              itemBuilder: (context, index) {
-                var msg = controller.messages[index];
-                return ChatBubble(
-                  msg: msg.message,
-                  isImage: msg.isImage,
-                  isFile: msg.isFile,
-                  isSentByMe: msg.isSentByMe,
-                );
-              },
-            );
-          },
-        ),
+        child: GetBuilder<HomeController>(builder: (controller) {
+          return ListView.builder(
+            shrinkWrap: true,
+            controller: controller.scrollController,
+            physics: const ScrollPhysics(),
+            itemCount: controller.messages.length,
+            itemBuilder: (context, index) {
+              // return Text('sdfsdf');
+              var msg = controller.messages[index];
+              return ChatBubble(
+                msg: msg.message,
+                isImage: msg.isImage,
+                isFile: msg.isFile,
+                isSentByMe: msg.isSentByMe,
+              );
+            },
+          );
+        }),
       ),
     );
   }
